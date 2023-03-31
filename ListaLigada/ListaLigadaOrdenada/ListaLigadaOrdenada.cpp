@@ -70,7 +70,7 @@ void menu()
 
 void inicializar()
 {
-	// se a lista já possuir elementos
+	// se a lista jÃ¡ possuir elementos
 // libera a memoria ocupada
 	NO* aux = primeiro;
 	while (aux != NULL) {
@@ -114,6 +114,7 @@ void exibirElementos()
 
 void inserirElemento()
 {
+		
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
 	if (novo == NULL)
@@ -129,24 +130,113 @@ void inserirElemento()
 	{
 		primeiro = novo;
 	}
-	else
+	else if (novo->valor < primeiro->valor)
 	{
-		// procura o final da lista
+		NO* aux = primeiro;
+		primeiro = novo;
+		primeiro->prox = aux;
+	}
+	else
+
+	{
 		NO* aux = primeiro;
 		while (aux->prox != NULL) {
+			if (aux->prox->valor > novo->valor)
+			{
+				break;
+
+			}
+
 			aux = aux->prox;
+
 		}
-		aux->prox = novo;
+		if (novo->valor != aux->valor)
+		{
+			novo->prox = aux->prox;
+			aux->prox = novo;
+		}
+		else
+		{
+			cout << "num pode repeteco \n";
+		}
+		
 	}
 }
 
+
+
 void excluirElemento()
 {
+	if (primeiro == NULL)
+	{
+		cout << "lista vazia";
+	}
+	else
+	{
+		NO* novo = (NO*)malloc(sizeof(NO));
+		if (novo == NULL)
+		{
+			return;
+		}
 
+
+		cout << "Digite o elemento: ";
+		cin >> novo->valor;
+
+		 if (novo->valor = primeiro->valor)
+		{
+			primeiro = primeiro->prox;
+			free(novo);
+		}
+		 else
+		 { 
+		NO* aux = primeiro;
+
+		while (aux->prox != NULL) {
+
+			if (aux->prox->valor == novo->valor)
+			{
+				aux->prox = aux->prox->prox;
+				free(novo);
+
+				break;
+
+
+			}
+
+			aux = aux->prox;
+
+		}
+
+	}
+}
 }
 
 void buscarElemento()
 {
+	NO* novo = (NO*)malloc(sizeof(NO));
+	if (novo == NULL)
+	{
+		return;
+	}
+
+	cout << "Digite o elemento: ";
+	cin >> novo->valor;
+
+	NO* aux = primeiro;
+
+	while (aux->prox != NULL) {
+		if (aux->valor == novo->valor)
+		{
+			cout << "valor encontrado\n";
+			break;
+
+
+		}
+
+		aux = aux->prox;
+
+	}
 
 }
 
